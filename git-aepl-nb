@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# git-aepl-nb - A collection of Git Extension for creating new branches 
+# catering the standards of Automotive Exchange Pvt. Ltd.
+#
+# Author:
+# Navead Kazi
+#
+
+usage() {
+	echo "usage: git aepl-nb <subcommand>"
+	echo
+	echo "Available subcommands are:"
+	echo "   f      Create a feature branch."
+	echo
+}
+
+main(){
+	if [ $# -lt 1 ]; then
+		usage
+		exit 1
+	fi
+	SUBCOMMAND="$1"; shift
+	if [ "${SUBCOMMAND}" = "f" ]; then
+		git aepl-nb-${SUBCOMMAND} $@
+	fi
+}
+
+main "$@"
+exit 0

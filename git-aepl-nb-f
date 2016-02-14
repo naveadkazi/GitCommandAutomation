@@ -1,0 +1,66 @@
+#!/bin/sh
+#
+# git-aepl-nb-f - Create a new feature branch catering the standards of 
+# Automotive Exchange Pvt. Ltd.
+#
+# Dependency - git-aepl-nb
+#
+# Author:
+# Navead Kazi
+#
+
+id=
+name=
+
+help(){
+	echo "help: git aepl-nb-f"
+	echo
+	echo "Mandatory options are:"
+	echo "   -i | --id     	Pivotal Tracker Id of the task."
+	echo "   -n | --name   	Name of the branch."
+}
+
+createBranch(){
+	git checkout -b f-$id-$name
+}
+
+notify(){
+	while true; do
+    read -p "You are creating a branch: f-$id-$name.
+	Do you want to continue (y/n) > " yn
+    case $yn in
+        [Yy]* ) createBranch; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer y or n.";;
+    esac
+done
+}
+
+main(){
+	while [ "$1" != "" ]; do
+
+		case $1 in
+			-i | --id )     shift
+									id=$1
+									shift
+									;;
+			-n | --name )   shift
+									name=$1
+									shift
+									;;
+			*)					
+							shift;;
+		esac
+	done
+	
+	if [ "$id" = "" ] || [ "$name" = "" ]; then
+		echo "Please provide mandatory options"
+		echo
+		help
+	else
+		notify
+	fi
+}
+
+main "$@"
+exit 0
