@@ -36,12 +36,7 @@ notify(){
 done
 }
 
-changeSmallCase(){
-	
-}
-
 main(){
-echo "asd"
 	while [ "$1" != "" ]; do
 
 		case $1 in
@@ -59,8 +54,6 @@ echo "asd"
 							shift;;
 		esac
 	done
-	echo $id
-	echo $name
 	if [ "$id" = "" ] || [ "$name" = "" ]; then
 		echo "Please provide mandatory options"
 		echo
